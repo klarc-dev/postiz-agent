@@ -119,7 +119,7 @@ postiz integrations:trigger reddit-abc123 getFlairs -d '{"subreddit":"programmin
 ### 3. Create Post with Flair ID
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Check out my project!" \
   -p reddit \
   --settings '{
@@ -191,7 +191,7 @@ postiz integrations:trigger youtube-123 getPlaylists
 ### 3. Post to Specific Playlist
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Video description" \
   -p youtube \
   --settings '{
@@ -248,7 +248,7 @@ postiz integrations:trigger linkedin-123 getCompanies
 ### 3. Post as Company
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Company announcement" \
   -p linkedin \
   --settings '{
@@ -336,7 +336,7 @@ for METHOD in $TOOLS; do
 done
 
 # 4. Create post with complete settings
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Your content" \
   --settings '{"key": "value"}' \
   -i "$INTEGRATION_ID"
@@ -397,7 +397,7 @@ echo "Selected flair: $FLAIR_NAME ($FLAIR_ID)"
 # 3. Create post
 echo ""
 echo "📝 Creating post..."
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "My post content" \
   -p reddit \
   --settings "{

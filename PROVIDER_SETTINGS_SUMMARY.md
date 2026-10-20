@@ -36,7 +36,7 @@ These use `EmptySettings` (no special configuration needed):
 ### Method 1: Command Line
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Content" \
   -p <provider-type> \
   --settings '<json-settings>' \
@@ -47,6 +47,7 @@ postiz posts:create \
 
 ```json
 {
+  "shortLink": false,
   "posts": [{
     "integration": { "id": "integration-id" },
     "value": [...],
@@ -63,7 +64,7 @@ postiz posts:create \
 ### Reddit Post
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Check out this project!" \
   -p reddit \
   --settings '{
@@ -83,7 +84,7 @@ postiz posts:create \
 ### YouTube Video
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Full video description..." \
   -p youtube \
   --settings '{
@@ -100,7 +101,7 @@ postiz posts:create \
 ### Twitter/X with Reply Controls
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Important announcement!" \
   -p x \
   --settings '{
@@ -112,7 +113,7 @@ postiz posts:create \
 ### LinkedIn Carousel
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Product showcase" \
   -m "img1.jpg,img2.jpg,img3.jpg" \
   -p linkedin \
@@ -126,7 +127,7 @@ postiz posts:create \
 ### Instagram Story
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Story content" \
   -m "story-image.jpg" \
   -p instagram \
@@ -139,7 +140,7 @@ postiz posts:create \
 ### TikTok Video
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "TikTok description #fyp" \
   -m "video.mp4" \
   -p tiktok \

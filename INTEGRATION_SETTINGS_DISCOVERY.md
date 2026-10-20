@@ -132,7 +132,7 @@ Output:
 Now you know what settings are available and required!
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "My post content" \
   -p reddit \
   --settings '{
@@ -331,7 +331,7 @@ echo $SETTINGS | jq '.output.settings'
 # 3. Create post with correct settings
 echo ""
 echo "📝 Creating post..."
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "My post content" \
   -p reddit \
   --settings '{

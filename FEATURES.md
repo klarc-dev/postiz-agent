@@ -39,13 +39,13 @@ For quick, simple posts:
 
 ```bash
 # Single post
-postiz posts:create -c "Hello!" -i "twitter-123"
+postiz posts:create --shortLink false -c "Hello!" -i "twitter-123"
 
 # With multiple images
-postiz posts:create -c "Post" --image "img1.jpg,img2.jpg,img3.jpg" -i "twitter-123"
+postiz posts:create --shortLink false -c "Post" --image "img1.jpg,img2.jpg,img3.jpg" -i "twitter-123"
 
 # With comments (no custom media per comment)
-postiz posts:create -c "Main" --comments "Comment 1;Comment 2" -i "twitter-123"
+postiz posts:create --shortLink false -c "Main" --comments "Comment 1;Comment 2" -i "twitter-123"
 ```
 
 **Limitations of Simple Mode:**
@@ -58,7 +58,7 @@ postiz posts:create -c "Main" --comments "Comment 1;Comment 2" -i "twitter-123"
 For complex posts with comments that have their own media:
 
 ```bash
-postiz posts:create --json complex-post.json
+postiz posts:create --shortLink false --json complex-post.json
 ```
 
 **Capabilities:**
@@ -78,6 +78,7 @@ postiz posts:create --json complex-post.json
 
 ```json
 {
+  "shortLink": false,
   "type": "schedule",
   "date": "2024-03-15T09:00:00Z",
   "posts": [{
@@ -117,6 +118,7 @@ postiz posts:create --json complex-post.json
 
 ```json
 {
+  "shortLink": false,
   "type": "now",
   "posts": [{
     "integration": { "id": "twitter-123" },
@@ -156,6 +158,7 @@ postiz posts:create --json complex-post.json
 
 ```json
 {
+  "shortLink": false,
   "type": "schedule",
   "date": "2024-12-25T12:00:00Z",
   "posts": [

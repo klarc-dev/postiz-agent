@@ -10,7 +10,7 @@ The Postiz API supports a rich post structure:
 {
   type: 'now' | 'schedule' | 'draft' | 'update',
   date: string,              // ISO 8601 date
-  shortLink: boolean,        // Use URL shortener
+  shortLink: false,          // Required policy: preserve canonical URLs
   tags: Tag[],              // Post tags
   posts: [                  // Can post to multiple platforms at once
     {
@@ -34,7 +34,7 @@ The Postiz API supports a rich post structure:
 ### Basic Post
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Hello World!" \
   -i "twitter-123"
 ```
@@ -42,7 +42,7 @@ postiz posts:create \
 ### Post with Multiple Images
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Check out these images!" \
   --image "https://example.com/img1.jpg,https://example.com/img2.jpg,https://example.com/img3.jpg" \
   -i "twitter-123"
@@ -51,7 +51,7 @@ postiz posts:create \
 ### Post with Comments (Simple)
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Main post content" \
   --comments "First comment;Second comment;Third comment" \
   -i "twitter-123"
@@ -60,7 +60,7 @@ postiz posts:create \
 ### Scheduled Post
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Future post" \
   -s "2024-12-31T12:00:00Z" \
   -i "twitter-123,linkedin-456"
@@ -75,7 +75,7 @@ For complex posts with comments that have their own media, use JSON files:
 **File:** `post-with-comments.json`
 
 ```bash
-postiz posts:create --json examples/post-with-comments.json
+postiz posts:create --shortLink false --json examples/post-with-comments.json
 ```
 
 This creates:
@@ -88,7 +88,7 @@ This creates:
 **File:** `multi-platform-post.json`
 
 ```bash
-postiz posts:create --json examples/multi-platform-post.json
+postiz posts:create --shortLink false --json examples/multi-platform-post.json
 ```
 
 This creates:
@@ -102,7 +102,7 @@ All scheduled for the same time with platform-specific content and media!
 **File:** `thread-post.json`
 
 ```bash
-postiz posts:create --json examples/thread-post.json
+postiz posts:create --shortLink false --json examples/thread-post.json
 ```
 
 This creates a 5-part Twitter thread, with each tweet having its own image and a 2-second delay between tweets.
@@ -115,7 +115,7 @@ This creates a 5-part Twitter thread, with each tweet having its own image and a
 {
   "type": "now",                    // "now", "schedule", "draft", "update"
   "date": "2024-01-15T12:00:00Z",  // When to post (ISO 8601)
-  "shortLink": true,                // Enable URL shortening
+  "shortLink": false,                // Disable URL shortening
   "tags": [],                       // Array of tags
   "posts": [...]                    // Array of posts
 }
@@ -154,6 +154,7 @@ Create a coordinated multi-platform launch:
 
 ```json
 {
+  "shortLink": false,
   "type": "schedule",
   "date": "2024-03-15T09:00:00Z",
   "posts": [
@@ -181,6 +182,7 @@ Create an educational thread:
 
 ```json
 {
+  "shortLink": false,
   "type": "now",
   "posts": [
     {
@@ -203,6 +205,7 @@ Live event updates with media:
 
 ```json
 {
+  "shortLink": false,
   "type": "now",
   "posts": [
     {
@@ -263,7 +266,7 @@ Use these IDs in your `integration.id` fields.
 
 for file in posts/*.json; do
   echo "Creating post from $file..."
-  postiz posts:create --json "$file"
+  postiz posts:create --shortLink false --json "$file"
   sleep 2
 done
 ```
@@ -276,7 +279,7 @@ cat > thread.json << 'EOF'
 {
   "type": "now",
   "date": "2024-12-31T12:00:00Z",
-  "shortLink": true,
+  "shortLink": false,
   "tags": [],
   "posts": [{
     "integration": { "id": "twitter-123" },
@@ -291,7 +294,7 @@ cat > thread.json << 'EOF'
 EOF
 
 # Post using the JSON file
-postiz posts:create --json thread.json
+postiz posts:create --shortLink false --json thread.json
 ```
 
 ## Error Handling

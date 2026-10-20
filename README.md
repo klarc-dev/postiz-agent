@@ -205,22 +205,22 @@ postiz integrations:trigger linkedin-789 mention -d '{"query":"microsoft"}'
 
 **Simple scheduled post**
 ```bash
-postiz posts:create -c "Content" -s "2024-12-31T12:00:00Z" -i "integration-id"
+postiz posts:create --shortLink false -c "Content" -s "2024-12-31T12:00:00Z" -i "integration-id"
 ```
 
 **Draft post**
 ```bash
-postiz posts:create -c "Content" -s "2024-12-31T12:00:00Z" -t draft -i "integration-id"
+postiz posts:create --shortLink false -c "Content" -s "2024-12-31T12:00:00Z" -t draft -i "integration-id"
 ```
 
 **Post with media**
 ```bash
-postiz posts:create -c "Content" -m "img1.jpg,img2.jpg" -s "2024-12-31T12:00:00Z" -i "integration-id"
+postiz posts:create --shortLink false -c "Content" -m "img1.jpg,img2.jpg" -s "2024-12-31T12:00:00Z" -i "integration-id"
 ```
 
 **Post with comments** (each comment can have its own media)
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Main post" -m "main.jpg" \
   -c "First comment" -m "comment1.jpg" \
   -c "Second comment" -m "comment2.jpg,comment3.jpg" \
@@ -230,12 +230,12 @@ postiz posts:create \
 
 **Multi-platform post**
 ```bash
-postiz posts:create -c "Content" -s "2024-12-31T12:00:00Z" -i "twitter-id,linkedin-id,facebook-id"
+postiz posts:create --shortLink false -c "Content" -s "2024-12-31T12:00:00Z" -i "twitter-id,linkedin-id,facebook-id"
 ```
 
 **Platform-specific settings**
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Content" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"subreddit":[{"value":{"subreddit":"programming","title":"Post Title","type":"text"}}]}' \
@@ -243,8 +243,12 @@ postiz posts:create \
 ```
 
 **Complex post from JSON file**
+
+Every JSON/API post envelope must contain top-level `"shortLink": false` (a boolean).
+JSON mode sends the file unchanged: `--shortLink false` alone does not override its contents.
+Validate the envelope before submission; preserve canonical URLs and historical receipts.
 ```bash
-postiz posts:create --json post.json
+postiz posts:create --shortLink false --json post.json
 ```
 
 **Options:**
@@ -256,7 +260,7 @@ postiz posts:create --json post.json
 - `-d, --delay` - Delay between comments in minutes (default: 0)
 - `--settings` - Platform-specific settings as JSON string
 - `-j, --json` - Path to JSON file with full post structure
-- `--shortLink` - Use short links (default: true)
+- `--shortLink false` - Required for every new post; the CLI otherwise defaults to true
 
 ---
 
@@ -372,7 +376,7 @@ RESULT=$(postiz upload video.mp4)
 PATH=$(echo "$RESULT" | jq -r '.path')
 
 # 2. Use the Postiz URL in your post
-postiz posts:create -c "Check out my video!" -s "2024-12-31T12:00:00Z" -m "$PATH" -i "tiktok-id"
+postiz posts:create --shortLink false -c "Check out my video!" -s "2024-12-31T12:00:00Z" -m "$PATH" -i "tiktok-id"
 ```
 
 **Adjust media to the platforms' limits**
@@ -446,7 +450,7 @@ Clipping uses the clipping minutes of your subscription: one minute for every mi
 postiz integrations:trigger reddit-id getFlairs -d '{"subreddit":"programming"}'
 
 # Post with subreddit and flair
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Content" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"subreddit":[{"value":{"subreddit":"programming","title":"My Post","type":"text","is_flair_required":true,"flair":{"id":"flair-123","name":"Discussion"}}}]}' \
@@ -463,7 +467,7 @@ VIDEO=$(postiz upload video.mp4)
 VIDEO_URL=$(echo "$VIDEO" | jq -r '.path')
 
 # Post with uploaded video URL
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Video description" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"title":"Video Title","type":"public","tags":[{"value":"tech","label":"Tech"}],"playlistId":"playlist-id"}' \
@@ -478,7 +482,7 @@ VIDEO=$(postiz upload video.mp4)
 VIDEO_URL=$(echo "$VIDEO" | jq -r '.path')
 
 # Post with uploaded video URL
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Video caption #fyp" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"privacy_level":"PUBLIC_TO_EVERYONE","duet":true,"stitch":true,"content_posting_method":"DIRECT_POST"}' \
@@ -492,7 +496,7 @@ postiz posts:create \
 postiz integrations:trigger linkedin-id getCompanies
 
 # Post as company
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Company announcement" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"companyId":"company-123"}' \
@@ -502,7 +506,7 @@ postiz posts:create \
 ### X (Twitter)
 ```bash
 # Create thread
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Thread 1/3 🧵" \
   -c "Thread 2/3" \
   -c "Thread 3/3" \
@@ -511,7 +515,7 @@ postiz posts:create \
   -i "twitter-id"
 
 # With reply settings
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Tweet content" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"who_can_reply_post":"everyone"}' \
@@ -525,7 +529,7 @@ IMAGE=$(postiz upload image.jpg)
 IMAGE_URL=$(echo "$IMAGE" | jq -r '.path')
 
 # Regular post
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Caption #hashtag" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"post_type":"post"}' \
@@ -536,7 +540,7 @@ postiz posts:create \
 STORY=$(postiz upload story.jpg)
 STORY_URL=$(echo "$STORY" | jq -r '.path')
 
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "" \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"post_type":"story"}' \
@@ -565,12 +569,13 @@ This allows AI agents to adapt to different platforms without hardcoded knowledg
 For complex posts with multiple platforms and settings:
 
 ```bash
-postiz posts:create --json complex-post.json
+postiz posts:create --shortLink false --json complex-post.json
 ```
 
 JSON structure:
 ```json
 {
+  "shortLink": false,
   "integrations": ["twitter-123", "linkedin-456"],
   "posts": [
     {
@@ -615,7 +620,7 @@ Comments are automatically converted to threads/replies based on platform:
 - **Instagram**: First comment
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Main post" \
   -c "Comment 1" \
   -c "Comment 2" \
@@ -633,7 +638,7 @@ REDDIT_ID=$(postiz integrations:list | jq -r '.[] | select(.identifier=="reddit"
 FLAIRS=$(postiz integrations:trigger "$REDDIT_ID" getFlairs -d '{"subreddit":"programming"}')
 FLAIR_ID=$(echo "$FLAIRS" | jq -r '.output[0].id')
 
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "My post content" \
   -s "2024-12-31T12:00:00Z" \
   --settings "{\"subreddit\":[{\"value\":{\"subreddit\":\"programming\",\"title\":\"Post Title\",\"type\":\"text\",\"is_flair_required\":true,\"flair\":{\"id\":\"$FLAIR_ID\",\"name\":\"Discussion\"}}}]}" \
@@ -646,7 +651,7 @@ postiz posts:create \
 VIDEO=$(postiz upload video.mp4)
 VIDEO_PATH=$(echo "$VIDEO" | jq -r '.path')
 
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Video description..." \
   -s "2024-12-31T12:00:00Z" \
   --settings '{"title":"My Video","type":"public","tags":[{"value":"tech","label":"Tech"}]}' \
@@ -657,7 +662,7 @@ postiz posts:create \
 ### Multi-Platform Campaign
 ```bash
 #!/bin/bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Same content everywhere" \
   -s "2024-12-31T12:00:00Z" \
   -m "image.jpg" \
@@ -671,7 +676,7 @@ DATES=("2024-02-14T09:00:00Z" "2024-02-15T09:00:00Z" "2024-02-16T09:00:00Z")
 CONTENT=("Monday motivation 💪" "Tuesday tips 💡" "Wednesday wisdom 🧠")
 
 for i in "${!DATES[@]}"; do
-  postiz posts:create \
+  postiz posts:create --shortLink false \
     -c "${CONTENT[$i]}" \
     -s "${DATES[$i]}" \
     -i "twitter-id"
@@ -823,12 +828,12 @@ postiz integrations:settings <id>                  # Get settings
 postiz integrations:trigger <id> <method> -d '{}'  # Fetch data
 
 # Posting (date is required)
-postiz posts:create -c "text" -s "2024-12-31T12:00:00Z" -i "id"                    # Simple
-postiz posts:create -c "text" -s "2024-12-31T12:00:00Z" -t draft -i "id"          # Draft
-postiz posts:create -c "text" -m "img.jpg" -s "2024-12-31T12:00:00Z" -i "id"      # With media
-postiz posts:create -c "main" -c "comment" -s "2024-12-31T12:00:00Z" -i "id"      # With comment
-postiz posts:create -c "text" -s "2024-12-31T12:00:00Z" --settings '{}' -i "id"   # Platform-specific
-postiz posts:create --json file.json                                               # Complex
+postiz posts:create --shortLink false -c "text" -s "2024-12-31T12:00:00Z" -i "id"                    # Simple
+postiz posts:create --shortLink false -c "text" -s "2024-12-31T12:00:00Z" -t draft -i "id"          # Draft
+postiz posts:create --shortLink false -c "text" -m "img.jpg" -s "2024-12-31T12:00:00Z" -i "id"      # With media
+postiz posts:create --shortLink false -c "main" -c "comment" -s "2024-12-31T12:00:00Z" -i "id"      # With comment
+postiz posts:create --shortLink false -c "text" -s "2024-12-31T12:00:00Z" --settings '{}' -i "id"   # Platform-specific
+postiz posts:create --shortLink false --json file.json                                               # Complex
 
 # Management
 postiz posts:list                                  # List posts

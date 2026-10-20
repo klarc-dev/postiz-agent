@@ -130,7 +130,7 @@ echo $RESULT
 PATH=$(echo $RESULT | jq -r '.path')
 
 # 3. Use in a post
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Check out my video!" \
   -m "$PATH" \
   -i "tiktok-123"

@@ -60,7 +60,7 @@ Even though the package is called "agent-postiz", the command is still:
 
 ```bash
 postiz --help  # ← Command name from "bin" field
-postiz posts:create -c "Hello!" -i "twitter-123"
+postiz posts:create --shortLink false -c "Hello!" -i "twitter-123"
 ```
 
 ## Package Name vs Command Name
@@ -346,7 +346,7 @@ pnpm install -g postiz
 
 ```bash
 postiz --help
-postiz posts:create -c "Hello!" -i "twitter-123"
+postiz posts:create --shortLink false -c "Hello!" -i "twitter-123"
 ```
 
 🚀 **Ready to publish!**

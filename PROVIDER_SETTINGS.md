@@ -7,7 +7,7 @@ The Postiz CLI supports platform-specific settings for each integration. Differe
 ### Method 1: Command Line Flags
 
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Your content" \
   -p <provider-type> \
   --settings '<json-settings>' \
@@ -17,7 +17,7 @@ postiz posts:create \
 ### Method 2: JSON File
 
 ```bash
-postiz posts:create --json post-with-settings.json
+postiz posts:create --shortLink false --json post-with-settings.json
 ```
 
 In the JSON file, specify settings per integration:
@@ -26,7 +26,7 @@ In the JSON file, specify settings per integration:
 {
   "type": "now",
   "date": "2024-01-15T12:00:00Z",
-  "shortLink": true,
+  "shortLink": false,
   "tags": [],
   "posts": [{
     "integration": { "id": "reddit-123" },
@@ -61,7 +61,7 @@ In the JSON file, specify settings per integration:
 
 **Example:**
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Post content here" \
   -p reddit \
   --settings '{
@@ -89,7 +89,7 @@ postiz posts:create \
 
 **Example:**
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Video description here" \
   -p youtube \
   --settings '{
@@ -117,7 +117,7 @@ postiz posts:create \
 
 **Example:**
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Tweet content" \
   -p x \
   --settings '{
@@ -128,7 +128,7 @@ postiz posts:create \
 
 **With Community:**
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Community tweet" \
   -p x \
   --settings '{
@@ -146,7 +146,7 @@ postiz posts:create \
 
 **Example:**
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "LinkedIn post" \
   -m "img1.jpg,img2.jpg,img3.jpg" \
   -p linkedin \
@@ -167,7 +167,7 @@ postiz posts:create \
 
 **Example:**
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Instagram post" \
   -m "photo.jpg" \
   -p instagram \
@@ -180,7 +180,7 @@ postiz posts:create \
 
 **Story Example:**
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Story content" \
   -m "story-image.jpg" \
   -p instagram \
@@ -220,7 +220,7 @@ Two independent axes decide whether a TikTok setting applies. A setting sent on 
 
 **Example:**
 ```bash
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "TikTok video description" \
   -m "video.mp4" \
   -p tiktok \
@@ -296,7 +296,7 @@ For complex settings, it's easier to use JSON files:
 {
   "type": "now",
   "date": "2024-01-15T12:00:00Z",
-  "shortLink": true,
+  "shortLink": false,
   "tags": [],
   "posts": [{
     "integration": { "id": "reddit-123" },
@@ -325,7 +325,7 @@ For complex settings, it's easier to use JSON files:
 ```
 
 ```bash
-postiz posts:create --json reddit-post.json
+postiz posts:create --shortLink false --json reddit-post.json
 ```
 
 ### YouTube Example
@@ -335,7 +335,7 @@ postiz posts:create --json reddit-post.json
 {
   "type": "schedule",
   "date": "2024-12-25T12:00:00Z",
-  "shortLink": true,
+  "shortLink": false,
   "tags": [],
   "posts": [{
     "integration": { "id": "youtube-123" },
@@ -362,7 +362,7 @@ postiz posts:create --json reddit-post.json
 ```
 
 ```bash
-postiz posts:create --json youtube-video.json
+postiz posts:create --shortLink false --json youtube-video.json
 ```
 
 ### Multi-Platform with Different Settings
@@ -372,7 +372,7 @@ postiz posts:create --json youtube-video.json
 {
   "type": "now",
   "date": "2024-01-15T12:00:00Z",
-  "shortLink": true,
+  "shortLink": false,
   "tags": [],
   "posts": [
     {

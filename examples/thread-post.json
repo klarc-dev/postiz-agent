@@ -1,7 +1,7 @@
 {
   "type": "now",
   "date": "2024-01-15T12:00:00Z",
-  "shortLink": true,
+  "shortLink": false,
   "tags": [],
   "posts": [
     {
@@ -39,7 +39,7 @@
           "delay": 2000
         },
         {
-          "content": "Step 3: Create your first post\n\npostiz posts:create -c \"Hello World!\" -i \"twitter-123\" (4/5)",
+          "content": "Step 3: Create your first post\n\npostiz posts:create --shortLink false -c \"Hello World!\" -i \"twitter-123\" (4/5)",
           "image": [
             {
               "id": "tutorial4",

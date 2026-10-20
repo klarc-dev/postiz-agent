@@ -1,7 +1,7 @@
 {
   "type": "now",
   "date": "2024-01-15T12:00:00Z",
-  "shortLink": true,
+  "shortLink": false,
   "tags": [],
   "posts": [{
     "integration": {

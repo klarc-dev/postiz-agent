@@ -23,7 +23,7 @@ echo ""
 
 # 2. Create a post
 echo "📝 Step 2: Creating a test post..."
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Hello from Postiz CLI! This is an automated test post." \
   -s "$(date -u -v+1H +%Y-%m-%dT%H:%M:%SZ)" # Schedule 1 hour from now
 echo ""

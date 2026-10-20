@@ -145,7 +145,7 @@ apps/cli/
 export POSTIZ_API_KEY=your_api_key
 
 # Create a post
-postiz posts:create -c "Hello World!" -i "twitter-123"
+postiz posts:create --shortLink false -c "Hello World!" -i "twitter-123"
 
 # List posts
 postiz posts:list
@@ -159,7 +159,7 @@ postiz upload ./image.png
 ```bash
 # Post to social media
 export POSTIZ_API_KEY="your_key"
-postiz posts:create -c "Your content here"
+postiz posts:create --shortLink false -c "Your content here"
 ```
 
 ## ✨ Example Files

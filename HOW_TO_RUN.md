@@ -30,7 +30,7 @@ pnpm link --global
 # Now you can use it anywhere!
 postiz --help
 postiz posts:list
-postiz posts:create -c "Hello!" -i "twitter-123"
+postiz posts:create --shortLink false -c "Hello!" -i "twitter-123"
 
 # To unlink later
 pnpm unlink --global
@@ -44,7 +44,7 @@ pnpm unlink --global
 # From the monorepo root
 pnpm --filter postiz start -- --help
 pnpm --filter postiz start -- posts:list
-pnpm --filter postiz start -- posts:create -c "Hello" -i "twitter-123"
+pnpm --filter postiz start -- posts:create --shortLink false -c "Hello" -i "twitter-123"
 ```
 
 ## Option 4: Use npm/npx (After Publishing) 🌐
@@ -160,7 +160,7 @@ export POSTIZ_API_KEY=your_key
 postiz integrations:list
 
 # Create a test post
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Test post from CLI" \
   -i "your-integration-id"
 ```
@@ -236,7 +236,7 @@ alias pz='postiz'
 
 # Now you can use
 pz posts:list
-pz posts:create -c "Quick post" -i "twitter-123"
+pz posts:create --shortLink false -c "Quick post" -i "twitter-123"
 ```
 
 ## Production Deployment
@@ -294,7 +294,7 @@ postiz --help
 postiz integrations:list
 
 # 5. Start using!
-postiz posts:create -c "My first post" -i "twitter-123"
+postiz posts:create --shortLink false -c "My first post" -i "twitter-123"
 ```
 
 Now you can use `postiz` from anywhere! 🚀

@@ -82,23 +82,23 @@ postiz --help
 
 ```bash
 # Simple post
-postiz posts:create -c "Hello World!" -i "twitter-123"
+postiz posts:create --shortLink false -c "Hello World!" -i "twitter-123"
 
 # Post with multiple images
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Check these out!" \
   -m "img1.jpg,img2.jpg" \
   -i "twitter-123"
 
 # Post with comments (each can have different media!)
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Main post" -m "main.jpg" \
   -c "First comment" -m "comment1.jpg" \
   -c "Second comment" -m "comment2.jpg" \
   -i "twitter-123"
 
 # Scheduled post
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Future post" \
   -s "2024-12-31T12:00:00Z" \
   -i "twitter-123"
@@ -162,7 +162,7 @@ The output will show integration IDs like:
 
 ```bash
 # Use the integration IDs from step 1
-postiz posts:create \
+postiz posts:create --shortLink false \
   -c "Posting to multiple platforms!" \
   -i "twitter-123,linkedin-456,facebook-789"
 ```
@@ -171,13 +171,13 @@ postiz posts:create \
 
 ```bash
 # Morning post
-postiz posts:create -c "Good morning!" -s "2024-01-15T09:00:00Z"
+postiz posts:create --shortLink false -c "Good morning!" -s "2024-01-15T09:00:00Z"
 
 # Afternoon post
-postiz posts:create -c "Lunch time update!" -s "2024-01-15T12:00:00Z"
+postiz posts:create --shortLink false -c "Lunch time update!" -s "2024-01-15T12:00:00Z"
 
 # Evening post
-postiz posts:create -c "Good night!" -s "2024-01-15T20:00:00Z"
+postiz posts:create --shortLink false -c "Good night!" -s "2024-01-15T20:00:00Z"
 ```
 
 ### 4. Upload and Post Image
@@ -187,7 +187,7 @@ postiz posts:create -c "Good night!" -s "2024-01-15T20:00:00Z"
 postiz upload ./my-image.png
 
 # Copy the URL from the response, then create post
-postiz posts:create -c "Check out this image!" --image "url-from-upload"
+postiz posts:create --shortLink false -c "Check out this image!" --image "url-from-upload"
 ```
 
 ## Tips & Tricks
@@ -209,7 +209,7 @@ postiz integrations:list | jq '.[] | .provider'
 # Create a batch of posts
 
 for hour in 09 12 15 18; do
-  postiz posts:create \
+  postiz posts:create --shortLink false \
     -c "Automated post at ${hour}:00" \
     -s "2024-01-15T${hour}:00:00Z"
   echo "Created post for ${hour}:00"
